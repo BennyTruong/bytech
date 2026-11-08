@@ -1,0 +1,134 @@
+# Replaces the old traefik/whoami placeholder in the existing "bytech" namespace.
+# Names (deployment, service, ingress, TLS secret) match the existing setup, so
+# certificates and domains are kept.
+# Replace bennytruong with your Docker Hub username before applying.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bytech
+  namespace: bytech
+  annotations:
+    # Keel: poll Docker Hub and roll out when the digest behind :latest changes
+    keel.sh/policy: force
+    keel.sh/match-tag: "true"
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@every 2m"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bytech
+  template:
+    metadata:
+      labels:
+        app: bytech
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
+      containers:
+        - name: bytech-app
+          image: bennytruong/bytech:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bytech-service
+  namespace: bytech
+spec:
+  selector:
+    app: bytech
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bytech-ingress
+  namespace: bytech
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: bytech.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bytech-service
+                port:
+                  number: 80
+    - host: www.bytech.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bytech-service
+                port:
+                  number: 80
+    - host: benny.bytech.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bytech-service
+                port:
+                  number: 80
+    - host: ab.bytech.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bytech-service
+                port:
+                  number: 80
+    - host: admin.bytech.se
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bytech-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - bytech.se
+        - www.bytech.se
+        - benny.bytech.se
+        - ab.bytech.se
+        - admin.bytech.se
+      secretName: bytech-se-tls
