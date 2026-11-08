@@ -1,7 +1,6 @@
 # Replaces the old traefik/whoami placeholder in the existing "bytech" namespace.
 # Names (deployment, service, ingress, TLS secret) match the existing setup, so
 # certificates and domains are kept.
-# Replace bennytruong with your Docker Hub username before applying.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
