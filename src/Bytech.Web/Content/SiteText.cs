@@ -9,6 +9,13 @@ public sealed record Expertise(string Id, string Title, string Text, string Keyw
 public sealed record Experience(string Role, string Period, string Text);
 
 /// <summary>
+/// A client or partner, shown as a logo. Width and height are the logo's own proportions.
+/// Logos are drawn as a single dark tone; set <paramref name="KeepTones"/> for marks that
+/// would turn into a solid block that way.
+/// </summary>
+public sealed record Client(string Name, string File, int Width, int Height, bool KeepTones = false);
+
+/// <summary>
 /// All copy on the site, in one place per language. Swedish is served on "/",
 /// English on "/en".
 /// </summary>
@@ -42,11 +49,13 @@ public sealed record SiteText
 
     public required string AboutHeading { get; init; }
     public required string AboutStatement { get; init; }
-    public required string AboutText { get; init; }
+    public required IReadOnlyList<string> AboutParagraphs { get; init; }
 
     public required string ExperienceHeading { get; init; }
     public required string ExperienceLead { get; init; }
     public required IReadOnlyList<Experience> Roles { get; init; }
+
+    public required string ClientsHeading { get; init; }
 
     public required string ContactHeading { get; init; }
     public required string ContactLead { get; init; }
@@ -60,6 +69,20 @@ public sealed record SiteText
     public required string NotFoundCta { get; init; }
 
     public bool IsEnglish => Lang == "en";
+
+    /// <summary>Clients and partners, the same in both languages. Files live in wwwroot/img/clients.</summary>
+    public static IReadOnlyList<Client> Clients { get; } =
+    [
+        new("Toptracer", "toptracer.png", 420, 53),
+        new("Topgolf", "topgolf.svg", 360, 52),
+        new("Mycronic", "mycronic.svg", 223, 32),
+        new("X Shore", "x-shore.png", 640, 128),
+        new("Kvadrat", "kvadrat.svg", 214, 40),
+        new("Alten", "alten.svg", 74, 120, KeepTones: true),
+        new("Scania", "scania.svg", 567, 94),
+        new("Traton", "traton.svg", 648, 110),
+        new("Assa Abloy", "assa-abloy.svg", 189, 28),
+    ];
 
     /// <summary>Link to a section on the start page. Absolute, because of &lt;base href="/"&gt;.</summary>
     public string Anchor(string id) => $"{BasePath}#{id}";
@@ -113,11 +136,17 @@ public sealed record SiteText
         ],
 
         AboutHeading = "Om Bytech",
-        AboutStatement = "Bakom Bytech står Benny Truong – civilingenjör från KTH som har gått från inbyggd mjukvara i elektrifierade fordon till att leda team bakom data- och IT-plattformar.",
-        AboutText = "Bytech tar konsultuppdrag inom arkitektur, utveckling och tekniskt ledarskap, och bygger egna webbtjänster som bokningssystem online.",
+        AboutStatement = "Bakom Bytech står Benny Truong – civilingenjör från KTH med över 13 års erfarenhet av mjukvaruutveckling och IT-infrastruktur.",
+        AboutParagraphs =
+        [
+            "Kombinerar hands-on förmåga att kunna programmera och sätta upp servrar med systemarkitektur och förmågan att bygga och leda tekniskt tunga team med både seniora och unga utvecklare.",
+            "Kombinerar tekniskt ledarskap med ett pragmatiskt ingenjörsperspektiv och har erfarenhet inom IT-infrastruktur, DevOps, IT-säkerhet samt att driva monitorering, loggning, backup och att drifta IT-tjänster och servrar.",
+            "Har många års erfarenhet av att leda agila, tvärfunktionella team, driva igenom arkitekturbeslut, förbättra utvecklingsprocesser samt omsätta verksamhetsbehov till skalbara tekniska lösningar.",
+            "Bytech tar konsultuppdrag inom arkitektur, utveckling och tekniskt ledarskap. Förmågan att kunna koordinera och kommunicera i en komplex organisation och skapa personliga kontaktytor skapar en effektiv balans mellan människa och teknik.",
+        ],
 
         ExperienceHeading = "Erfarenhet",
-        ExperienceLead = "Över tolv år i roller mellan kod, arkitektur och ledning.",
+        ExperienceLead = "Över tretton år i roller mellan kod, arkitektur och ledning.",
         Roles =
         [
             new("Senior systemarkitekt", "2026 –",
@@ -129,6 +158,8 @@ public sealed record SiteText
             new("Mjukvaruutvecklare & arkitekt", "2013 – 2019",
                 "Styrsystem och mjukvaruarkitektur för el- och hybridfordon – från arbetsmaskiner till lastbilar på elväg – och en patenterad metod för bromsstyrning."),
         ],
+
+        ClientsHeading = "Kunder & Partners",
 
         ContactHeading = "Har du ett uppdrag i tankarna?",
         ContactLead = "Hör av dig, så tar vi det därifrån.",
@@ -183,11 +214,17 @@ public sealed record SiteText
         ],
 
         AboutHeading = "About Bytech",
-        AboutStatement = "Behind Bytech is Benny Truong – an M.Sc. engineer from KTH who has gone from embedded software in electrified vehicles to leading the teams behind data and IT platforms.",
-        AboutText = "Bytech takes on consulting assignments in architecture, development and technical leadership, and builds its own web services such as online booking systems.",
+        AboutStatement = "Behind Bytech is Benny Truong – an M.Sc. engineer from KTH with more than 13 years of experience in software development and IT infrastructure.",
+        AboutParagraphs =
+        [
+            "Combines the hands-on ability to write code and set up servers with system architecture and the ability to build and lead technically heavy teams of both senior and junior developers.",
+            "Combines technical leadership with a pragmatic engineering perspective, with experience in IT infrastructure, DevOps and IT security, as well as running monitoring, logging, backup and the operation of IT services and servers.",
+            "Has many years of experience leading agile, cross-functional teams, driving architecture decisions, improving development processes and turning business needs into scalable technical solutions.",
+            "Bytech takes on consulting assignments in architecture, development and technical leadership. The ability to coordinate and communicate in a complex organisation and to build personal relationships creates an effective balance between people and technology.",
+        ],
 
         ExperienceHeading = "Experience",
-        ExperienceLead = "More than twelve years in roles spanning code, architecture and management.",
+        ExperienceLead = "More than thirteen years in roles spanning code, architecture and management.",
         Roles =
         [
             new("Senior Systems Architect", "2026 –",
@@ -199,6 +236,8 @@ public sealed record SiteText
             new("Software Developer & Architect", "2013 – 2019",
                 "Control systems and software architecture for electric and hybrid vehicles – from construction machines to trucks on electric roads – and a patented brake control method."),
         ],
+
+        ClientsHeading = "Clients & Partners",
 
         ContactHeading = "Have an assignment in mind?",
         ContactLead = "Get in touch and we'll take it from there.",

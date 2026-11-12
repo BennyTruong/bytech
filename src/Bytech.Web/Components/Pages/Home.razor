@@ -66,7 +66,10 @@
         <h2 class="eyebrow">@T.AboutHeading</h2>
         <div class="row-body">
             <p class="about-statement">@T.AboutStatement</p>
-            <p class="about-text">@T.AboutText</p>
+            @foreach (var paragraph in T.AboutParagraphs)
+            {
+                <p class="about-text">@paragraph</p>
+            }
         </div>
     </div>
 </section>
@@ -87,6 +90,23 @@
                         <p class="role-period">@role.Period</p>
                     </div>
                     <p class="row-body">@role.Text</p>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="section clients" id="clients" aria-labelledby="clients-heading">
+    <div class="container">
+        <h2 id="clients-heading">@T.ClientsHeading</h2>
+
+        <ul class="client-logos">
+            @foreach (var client in SiteText.Clients)
+            {
+                <li>
+                    <img class="@(client.KeepTones ? "client-logo keep-tones" : "client-logo")"
+                         src="@Assets[$"img/clients/{client.File}"]" alt="@client.Name"
+                         width="@client.Width" height="@client.Height" loading="lazy" />
                 </li>
             }
         </ul>

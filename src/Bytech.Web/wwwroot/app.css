@@ -311,15 +311,19 @@ h1:focus {
     margin-top: 2.75rem;
 }
 
+/* Spread by the space between the titles, not by equal columns: the titles differ
+   a lot in length, and equal columns would leave uneven gaps between them. */
 .hero-areas {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    display: flex;
+    justify-content: space-between;
+    column-gap: 2rem;
     border-top: 1px solid var(--on-dark-line);
 }
 
 .hero-areas a {
     display: block;
-    padding: 1.5rem 1.5rem 1.75rem 0;
+    padding: 1.5rem 0 1.75rem;
+    white-space: nowrap;
     font-size: .9375rem;
     font-weight: 500;
     line-height: 1.35;
@@ -432,7 +436,11 @@ h1:focus {
 }
 
 .about-text {
-    margin-top: 1.5rem;
+    margin-top: 1.75rem;
+}
+
+.about-text + .about-text {
+    margin-top: 1rem;
 }
 
 /* Experience: the same rows, set smaller. */
@@ -453,6 +461,55 @@ h1:focus {
     font-weight: 500;
     letter-spacing: .08em;
     color: var(--muted-foreground);
+}
+
+/* Clients: a quiet strip of logos that closes the experience section. */
+
+.clients {
+    padding-top: 0;
+    text-align: center;
+}
+
+.clients h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+}
+
+.client-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.client-logos li {
+    flex: 0 0 20%;
+    display: grid;
+    place-items: center;
+    height: 6.5rem;
+    padding-inline: 1.25rem;
+}
+
+/* Every logo is drawn in one dark tone so the row reads as a whole; colour returns on hover. */
+.client-logo {
+    width: auto;
+    max-width: min(100%, 8.75rem);
+    max-height: 2.5rem;
+    filter: brightness(0);
+    opacity: .55;
+    transition: filter var(--transition), opacity var(--transition);
+}
+
+.client-logo.keep-tones {
+    max-height: 3.75rem;
+    filter: grayscale(1);
+    opacity: .7;
+}
+
+.client-logos li:hover .client-logo {
+    filter: none;
+    opacity: 1;
 }
 
 /* Contact */
@@ -579,6 +636,10 @@ h1:focus {
     .footer-grid > :first-child {
         grid-column: 1 / -1;
     }
+
+    .client-logos li {
+        flex-basis: 33.333%;
+    }
 }
 
 @media (max-width: 48rem) {
@@ -611,7 +672,9 @@ h1:focus {
     }
 
     .hero-areas {
+        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 0;
     }
 
     .hero-areas li:nth-child(n + 3) {
@@ -619,7 +682,8 @@ h1:focus {
     }
 
     .hero-areas a {
-        padding-block: 1.125rem 1.25rem;
+        padding: 1.125rem 1.5rem 1.25rem 0;
+        white-space: normal;
     }
 }
 
@@ -627,6 +691,11 @@ h1:focus {
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+    }
+
+    .client-logos li {
+        flex-basis: 50%;
+        height: 5.5rem;
     }
 }
 
