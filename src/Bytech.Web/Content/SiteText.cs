@@ -70,6 +70,9 @@ public sealed record SiteText
 
     public bool IsEnglish => Lang == "en";
 
+    /// <summary>Image shown when the page is shared in social media and chat apps (1200 × 630).</summary>
+    public string ShareImagePath => IsEnglish ? "/img/share-en.png" : "/img/share-sv.png";
+
     /// <summary>Clients and partners, the same in both languages. Files live in wwwroot/img/clients.</summary>
     public static IReadOnlyList<Client> Clients { get; } =
     [
@@ -82,6 +85,7 @@ public sealed record SiteText
         new("Scania", "scania.svg", 567, 94),
         new("Traton", "traton.svg", 648, 110),
         new("Assa Abloy", "assa-abloy.svg", 189, 28),
+        new("Volvo", "volvo.svg", 800, 110),
     ];
 
     /// <summary>Link to a section on the start page. Absolute, because of &lt;base href="/"&gt;.</summary>
@@ -102,8 +106,8 @@ public sealed record SiteText
         OtherLangPath = "/en",
         SwitchLanguageLabel = "Switch to English",
 
-        PageTitle = "Bytech – Tekniskt ledarskap, mjukvara och IT-infrastruktur",
-        MetaDescription = "Bytech är ett konsultbolag i Stockholm med spetskompetens inom tekniskt ledarskap, mjukvaruutveckling, IT-infrastruktur samt data och AI.",
+        PageTitle = "Bytech | Benny Truong – Teknikkonsult inom IT och mjukvara",
+        MetaDescription = "Bytech är Benny Truongs konsultbolag i Stockholm. Teknikkonsult inom tekniskt ledarskap, mjukvaruutveckling, systemarkitektur, IT-infrastruktur, DevOps och R&D.",
 
         NavExpertise = "Kompetens",
         NavAbout = "Om",
@@ -111,7 +115,7 @@ public sealed record SiteText
         NavContact = "Kontakt",
         MenuLabel = "Meny",
 
-        HeroEyebrow = "Konsult inom teknik och ledarskap",
+        HeroEyebrow = "Benny Truong · Teknikkonsult inom IT och mjukvara",
         HeroTitle = "Tekniskt ledarskap,",
         HeroTitleAccent = "från idé till drift.",
         HeroLead = "Bytech hjälper organisationer att bygga mjukvara, team och plattformar som håller över tid.",
@@ -165,7 +169,7 @@ public sealed record SiteText
         ContactLead = "Hör av dig, så tar vi det därifrån.",
         ContactCta = "Kontakta mig på LinkedIn",
 
-        FooterBlurb = "Tekniskt ledarskap, mjukvara och IT-infrastruktur – med bas i Stockholm.",
+        FooterBlurb = "Benny Truongs konsultbolag inom tekniskt ledarskap, mjukvaruutveckling och IT-infrastruktur – med bas i Stockholm.",
         FooterLocation = "Stockholm, Sverige",
 
         NotFoundHeading = "Sidan finns inte",
@@ -180,8 +184,8 @@ public sealed record SiteText
         OtherLangPath = "/",
         SwitchLanguageLabel = "Byt till svenska",
 
-        PageTitle = "Bytech – Technical leadership, software and IT infrastructure",
-        MetaDescription = "Bytech is a Stockholm-based consultancy specialising in technical leadership, software development, IT infrastructure, and data and AI.",
+        PageTitle = "Bytech | Benny Truong – IT & Software Engineering Consultant",
+        MetaDescription = "Bytech is Benny Truong's consultancy in Stockholm, Sweden: technical leadership, software development, system architecture, IT infrastructure, DevOps and R&D.",
 
         NavExpertise = "Expertise",
         NavAbout = "About",
@@ -189,7 +193,7 @@ public sealed record SiteText
         NavContact = "Contact",
         MenuLabel = "Menu",
 
-        HeroEyebrow = "Technology and leadership consulting",
+        HeroEyebrow = "Benny Truong · IT and software engineering consultant",
         HeroTitle = "Technical leadership,",
         HeroTitleAccent = "from idea to operations.",
         HeroLead = "Bytech helps organisations build software, teams and platforms that stand the test of time.",
@@ -243,7 +247,7 @@ public sealed record SiteText
         ContactLead = "Get in touch and we'll take it from there.",
         ContactCta = "Contact me on LinkedIn",
 
-        FooterBlurb = "Technical leadership, software and IT infrastructure – based in Stockholm.",
+        FooterBlurb = "Benny Truong's consultancy in technical leadership, software development and IT infrastructure – based in Stockholm.",
         FooterLocation = "Stockholm, Sweden",
 
         NotFoundHeading = "Page not found",

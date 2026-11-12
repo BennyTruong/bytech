@@ -1,0 +1,34 @@
+# Bytech
+
+> Bytech is the consultancy of Benny Truong, a technology consultant based in Stockholm, Sweden. Bytech takes on consulting assignments in technical leadership, software development, system architecture and IT infrastructure.
+
+Bytech (bytech.se) is the company website and portfolio of Benny Truong. In Swedish: Bytech är Benny Truongs konsultbolag i Stockholm – teknikkonsult inom tekniskt ledarskap, mjukvaruutveckling, systemarkitektur, IT-infrastruktur, DevOps och R&D.
+
+## About Benny Truong
+
+- M.Sc. engineer (civilingenjör) from KTH Royal Institute of Technology in Stockholm.
+- More than 13 years of experience in software development and IT infrastructure.
+- Combines hands-on work – writing code and setting up servers – with system architecture and with building and leading technically heavy teams of senior and junior developers.
+- Has worked as senior systems architect, R&D manager for data and IT infrastructure, consulting manager, technical lead, and software developer and architect.
+- Many years of experience leading agile, cross-functional teams, driving architecture decisions, improving development processes and turning business needs into scalable technical solutions.
+
+## Areas of expertise
+
+- Tech Lead / Engineering Management: leading agile, cross-functional teams; product ownership; Scrum and SAFe; tying vision, roadmap and backlog into deliveries.
+- Software Development: system architecture, requirements and code; Python and C; real-time and embedded software for electrified vehicles; full-stack web.
+- IT Infrastructure: cloud platforms and developer environments built as code; Kubernetes and Azure; Infrastructure as Code; CI/CD; DevOps; IT security in line with NIS2 and CRA; monitoring, logging, backup and operations of IT services and servers.
+- Data & AI: shared data and analytics platforms with clear ownership and governance.
+
+## Clients and partners
+
+Toptracer, Topgolf, Mycronic, X Shore, Kvadrat, Alten, Scania, Traton, Assa Abloy, Volvo.
+
+## Pages
+
+- [Bytech – svenska](https://bytech.se/): the full site in Swedish (default language).
+- [Bytech – English](https://bytech.se/en): the full site in English.
+
+## Contact
+
+- [Benny Truong on LinkedIn](https://www.linkedin.com/in/bennytruong/): the way to get in touch about consulting assignments.
+- Location: Stockholm, Sweden.

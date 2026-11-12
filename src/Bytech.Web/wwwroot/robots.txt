@@ -1,0 +1,5 @@
+# Everything on bytech.se is public and may be crawled, by search engines and AI agents alike.
+User-agent: *
+Allow: /
+
+Sitemap: https://bytech.se/sitemap.xml
