@@ -103,16 +103,6 @@ spec:
                 name: bytech-service
                 port:
                   number: 80
-    - host: ab.bytech.se
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: bytech-service
-                port:
-                  number: 80
     - host: admin.bytech.se
       http:
         paths:
@@ -128,6 +118,5 @@ spec:
         - bytech.se
         - www.bytech.se
         - benny.bytech.se
-        - ab.bytech.se
         - admin.bytech.se
       secretName: bytech-se-tls

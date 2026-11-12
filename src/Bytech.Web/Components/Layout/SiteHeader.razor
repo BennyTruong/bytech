@@ -1,0 +1,30 @@
+<header class="site-header" data-site-header>
+    <div class="container header-inner">
+        <a class="brand" href="@T.BasePath" aria-label="Bytech">
+            <img src="@Assets["img/bytech-logo.png"]" alt="Bytech" width="199" height="61" />
+        </a>
+
+        <nav class="site-nav" id="site-nav">
+            <a href="@T.Anchor("expertise")">@T.NavExpertise</a>
+            <a href="@T.Anchor("about")">@T.NavAbout</a>
+            <a href="@T.Anchor("experience")">@T.NavExperience</a>
+            <a href="@T.Anchor("contact")">@T.NavContact</a>
+        </nav>
+
+        <div class="header-actions">
+            <a class="icon-button header-social" href="@SiteText.LinkedInUrl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <Icon Name="linkedin" />
+            </a>
+
+            <LanguageToggle />
+
+            <button class="icon-button menu-button" type="button" aria-label="@T.MenuLabel" aria-controls="site-nav" aria-expanded="false" data-menu-toggle>
+                <Icon Name="menu" />
+            </button>
+        </div>
+    </div>
+</header>
+
+@code {
+    [CascadingParameter] public required SiteText T { get; set; }
+}

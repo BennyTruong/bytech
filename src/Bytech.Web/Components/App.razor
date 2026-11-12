@@ -1,11 +1,15 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@inject NavigationManager Nav
+
+<!DOCTYPE html>
+<html lang="@SiteText.For(Nav).Lang">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#141f34" />
     <base href="/" />
     <ResourcePreloader />
+    <link rel="icon" type="image/svg+xml" href="@Assets["favicon.svg"]" />
     <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["Bytech.Web.styles.css"]" />
     <ImportMap />
@@ -15,6 +19,7 @@
 <body>
     <Routes />
     <ReconnectModal />
+    <script src="@Assets["site.js"]"></script>
     <script src="@Assets["_framework/blazor.web.js"]"></script>
 </body>
 

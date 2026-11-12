@@ -1,0 +1,11 @@
+@* A full page load (not enhanced navigation) so site.js can keep the scroll position. *@
+<a class="lang-toggle" href="@T.OtherLangPath" hreflang="@(T.IsEnglish ? "sv" : "en")"
+   aria-label="@T.SwitchLanguageLabel" title="@T.SwitchLanguageLabel"
+   data-lang-toggle data-enhance-nav="false">
+    <span class="@(T.IsEnglish ? null : "is-active")">SV</span>
+    <span class="@(T.IsEnglish ? "is-active" : null)">EN</span>
+</a>
+
+@code {
+    [CascadingParameter] public required SiteText T { get; set; }
+}

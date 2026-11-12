@@ -1,7 +1,108 @@
 ﻿@page "/"
+@page "/en"
 
-<PageTitle>Bytech</PageTitle>
+<PageTitle>@T.PageTitle</PageTitle>
 
-<h1>Bytech</h1>
+<HeadContent>
+    <meta name="description" content="@T.MetaDescription" />
+    <link rel="canonical" href="@($"https://bytech.se{T.BasePath}")" />
+    <link rel="alternate" hreflang="sv" href="https://bytech.se/" />
+    <link rel="alternate" hreflang="en" href="https://bytech.se/en" />
+    <link rel="alternate" hreflang="x-default" href="https://bytech.se/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bytech" />
+    <meta property="og:title" content="@T.PageTitle" />
+    <meta property="og:description" content="@T.MetaDescription" />
+    <meta property="og:url" content="@($"https://bytech.se{T.BasePath}")" />
+</HeadContent>
 
-<p>Hello from Blazor, Testing.</p>
+<section class="hero">
+    <div class="container hero-inner">
+        <p class="eyebrow">@T.HeroEyebrow</p>
+        <h1>
+            @T.HeroTitle
+            <span class="hero-accent">@T.HeroTitleAccent</span>
+        </h1>
+        <p class="hero-lead">@T.HeroLead</p>
+        <a class="button button-glass" href="@T.Anchor("contact")">
+            @T.HeroCta <Icon Name="arrow" />
+        </a>
+    </div>
+
+    <div class="container">
+        <ul class="hero-areas">
+            @foreach (var area in T.Areas)
+            {
+                <li><a href="@T.Anchor(area.Id)">@area.Title</a></li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="section" id="expertise">
+    <div class="container">
+        <div class="section-head">
+            <h2>@T.ExpertiseHeading</h2>
+            <p>@T.ExpertiseLead</p>
+        </div>
+
+        <ul class="rows">
+            @foreach (var area in T.Areas)
+            {
+                <li class="row area" id="@area.Id">
+                    <h3>@area.Title</h3>
+                    <div class="row-body">
+                        <p>@area.Text</p>
+                        <p class="area-keywords">@area.Keywords</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="section section-tint" id="about">
+    <div class="container row">
+        <h2 class="eyebrow">@T.AboutHeading</h2>
+        <div class="row-body">
+            <p class="about-statement">@T.AboutStatement</p>
+            <p class="about-text">@T.AboutText</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="experience">
+    <div class="container">
+        <div class="section-head">
+            <h2>@T.ExperienceHeading</h2>
+            <p>@T.ExperienceLead</p>
+        </div>
+
+        <ul class="rows">
+            @foreach (var role in T.Roles)
+            {
+                <li class="row role">
+                    <div>
+                        <h3>@role.Role</h3>
+                        <p class="role-period">@role.Period</p>
+                    </div>
+                    <p class="row-body">@role.Text</p>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="section section-tint contact" id="contact">
+    <div class="container">
+        <h2>@T.ContactHeading</h2>
+        <p>@T.ContactLead</p>
+        <a class="button button-primary" href="@SiteText.LinkedInUrl" target="_blank" rel="noopener noreferrer">
+            <Icon Name="linkedin" /> @T.ContactCta
+        </a>
+    </div>
+</section>
+
+@code {
+    [CascadingParameter] public required SiteText T { get; set; }
+}
